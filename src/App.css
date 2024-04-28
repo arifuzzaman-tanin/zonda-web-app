@@ -5,3 +5,13 @@
 .main{
     height: 85vh;
 }
+
+.active{
+    border: 1px solid blue;
+    background-color: rgb(208, 207, 237) !important;
+    color: blue !important;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}

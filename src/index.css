@@ -10,3 +10,14 @@
 .css-1dimb5e-singleValue{
     color: gray !important; /* select box selected default color */
 }
+
+.inline-icon {
+    display: inline-flex;
+    vertical-align: top;
+}
+
+.action-btn{
+    border: 0px;
+    padding: 0px;
+    background-color: white;
+}

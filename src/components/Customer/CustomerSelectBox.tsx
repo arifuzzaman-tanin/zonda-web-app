@@ -15,7 +15,7 @@ function CustomerSelectBox() {
 
     return (
         <>
-            <Select options={options} />
+            <Select defaultValue={options[0]} options={options} />
         </>
     );
 }
