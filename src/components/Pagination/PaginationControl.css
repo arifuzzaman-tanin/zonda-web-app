@@ -28,3 +28,14 @@
 .pagination button:hover {
     background-color: #f0f0f0;
 }
+
+.pagination-button-active{
+    color: gray !important;
+}
+
+.pagination-div-bottom {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
+  }

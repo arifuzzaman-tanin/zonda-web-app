@@ -1,0 +1,12 @@
+.bg-off-whight{
+    background-color: #FAF9F6 !important;
+}
+
+/* select box */
+.css-1u9des2-indicatorSeparator{
+    display: none; /* hide select box end | bar */
+}
+
+.css-1dimb5e-singleValue{
+    color: gray !important; /* select box selected default color */
+}
