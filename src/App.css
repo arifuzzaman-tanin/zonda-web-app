@@ -7,11 +7,28 @@
 }
 
 .active{
-    border: 1px solid blue;
-    background-color: rgb(208, 207, 237) !important;
+    border: 1px solid #FAF9F6;
+    background-color: #f3f8ff !important;
     color: blue !important;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .cursor-pointer{
     cursor: pointer;
+}
+
+.navigation-control{
+    margin-top: 20px;
+}
+
+.navigation-control ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.navigation-control ul li {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-left: 20px;
 }

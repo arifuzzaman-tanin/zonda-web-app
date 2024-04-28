@@ -55,7 +55,7 @@ function ProductList() {
                         <table className="table table-sm">
                             <thead>
                                 <tr>
-                                    <th className="bg-off-whight border-0 text-uppercase text-muted">Product Id <i className="material-icons inline-icon">swap_vert</i></th>
+                                    <th className="bg-off-whight border-0 text-uppercase text-muted cursor-pointer">Product Id <i className="material-icons inline-icon">swap_vert</i></th>
                                     <th className="bg-off-whight border-0 text-uppercase text-muted">Product Name</th>
                                     <th className="bg-off-whight border-0 text-uppercase text-muted">Product Price</th>
                                     <th className="bg-off-whight border-0 text-uppercase text-muted">Action</th>

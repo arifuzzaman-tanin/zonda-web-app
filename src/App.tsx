@@ -10,11 +10,13 @@ function App() {
           <div className="row">
             <div className="col-2 app-col-height-100 bg-white pt-2">
               <CustomerSelectBox />
-
-              <ul className="list-group mt-3">
-                <li className="list-group-item border-0 rounded-1 cursor-pointer">Customer Info</li>
-                <li className="list-group-item border-0 rounded-1 cursor-pointer active">Product Details</li>
-              </ul>
+              
+              <div className="navigation-control">
+                <ul>
+                  <li className="cursor-pointer rounded-1">Customer Info</li>
+                  <li className="cursor-pointer rounded-1 active">Product Details</li>
+                </ul>
+              </div>
             </div>
             <div className="col-10 app-col-height-100">
               <div className="app-col-height-100 col-10 float-end">
