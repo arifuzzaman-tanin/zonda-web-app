@@ -1,17 +1,32 @@
 import Select from 'react-select'
+import { useState, useEffect } from "react";
+import CustomersService from './CustomerService';
+import IResponse from '../../common/IResponce';
+import ICustomerSelectBox from './ICustomer';
+
 
 function CustomerSelectBox() {
 
-    const options = [
-        {
-            value: 0,
-            label: "Md. Arifuzzaman Tanin"
-        },
-        {
-            value: 1,
-            label: "Shanta Akther Saniya"
-        }
-    ]
+    const [selectBoxCustomers, setSelectBoxCustomers] = useState<ICustomerSelectBox[]>([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const customers: IResponse = await CustomersService.getSelectBoxCustomers();
+                setSelectBoxCustomers(customers.data);
+            } catch (error) {
+                console.error("Error fetching customers:", error);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    const options = selectBoxCustomers.map(customer => ({
+        value: customer.id,
+        label: customer.name
+    }));
+
 
     return (
         <>
