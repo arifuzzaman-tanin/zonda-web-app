@@ -2,7 +2,7 @@ import ProductList from "./components/Product/ProductList";
 import CustomerList from "./components/Customer/CustomerList";
 import CustomerSelectBox from "./components/Customer/CustomerSelectBox";
 import { useState } from 'react';
-import ICustomerSelectBox from './ICustomer';
+import ICustomerSelectBox from "./components/Customer/ICustomer";
 
 import {
   BrowserRouter as Router,
@@ -15,12 +15,10 @@ import "./App.css";
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState('product');
 
-  const [selectedCustomer, setSelectedCustomer] = useState<ICustomerSelectBox | null>(null);
+  const [selectedCustomer, setSelectedCustomer] = useState<any | null>(null);
 
-  const handleSelectChange = (selectedOption: ICustomerSelectBox | null) => {
+  const handleSelectChange = (selectedOption: any | null) => {
     setSelectedCustomer(selectedOption);
-    console.log(selectedOption);
-    // Do whatever you want with the selected customer data here
   };
 
   // Function to handle menu item click
@@ -57,7 +55,7 @@ function App() {
                     ></Route>
                     <Route
                       path="/"
-                      element={<ProductList />}
+                      element={<ProductList customerId={selectedCustomer} />}
                     ></Route>
                   </Routes>
                 </div>

@@ -31,7 +31,7 @@ function CustomerSelectBox({ onSelectChange }: Props) {
         value: customer.id,
         label: customer.name
     }));
-
+    
     const handleSelectChange = (selectedOption: ICustomerSelectBox) => {
         setSelectedOption(selectedOption);
         onSelectChange(selectedOption); // Call the onSelect callback with selected option

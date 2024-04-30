@@ -1,7 +1,34 @@
 import Pagination from "../Pagination/PaginationControl";
+import { useState, useEffect } from "react";
+import ProductService from "./ProductService";
+import ICustomerOrder from "./IProduct";
+import IResponcePaginated from "../../common/IResponcePaginated";
 
+function ProductList(customer: any) {
+    const [customerOrders, setCustomerOrders] = useState<IResponcePaginated | null>(null); // Adjusted the type here
 
-function ProductList() {
+    useEffect(() => {
+        const fetchData = async () => {
+            console.log("Fetching data...");
+            try {
+                const orders = await ProductService.getCustomersOrdersByCustomerId(customer.customerId.value);
+                setCustomerOrders(orders);
+                console.log("Orders:", customerOrders?.items);
+            } catch (error) {
+                console.error("Error fetching customers:", error);
+            }
+        };
+
+        if (customer.customerId != null) {
+            console.log("Customer ID is not null:", customer.customerId.value);
+            fetchData();
+        } else {
+            console.log("Customer ID is null:", customer.customerId);
+            setCustomerOrders(null); // Handling the case when customer ID is null
+        }
+    }, [customer?.customerId]);
+
+    console.log(customer)
     const products: any[] = [
         {
             id: 1,
@@ -62,13 +89,13 @@ function ProductList() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {products.map((product, index) => (
-                                    <tr key={product.id}>
+                                {customerOrders?.items.map((order, index) => (
+                                    <tr key={index}>
                                         <td className="text-primary">{index + 1}</td>
-                                        <td>{product.name}</td>
-                                        <td>{product.price}</td>
+                                        <td>{order.product.name}</td>
+                                        <td>{order.product.price}</td>
                                         <td>
-                                        <div className="btn-group dropstart">
+                                            <div className="btn-group dropstart">
                                                 <button className="action-btn" data-bs-toggle="dropdown" aria-expanded="false">
                                                     <i className="material-icons">more_horiz</i>
                                                 </button>
