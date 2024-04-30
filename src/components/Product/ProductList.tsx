@@ -1,64 +1,41 @@
 import Pagination from "../Pagination/PaginationControl";
 import { useState, useEffect } from "react";
 import ProductService from "./ProductService";
-import ICustomerOrder from "./IProduct";
 import IResponcePaginated from "../../common/IResponcePaginated";
 
 function ProductList(customer: any) {
-    const [customerOrders, setCustomerOrders] = useState<IResponcePaginated | null>(null); // Adjusted the type here
+    const [customerOrders, setCustomerOrders] = useState<IResponcePaginated | null>(null);
 
     useEffect(() => {
-        const fetchData = async () => {
+        fetchData();
+    }, [customer?.customerId]);
+
+    const fetchData = async () => {
+        if (customer?.customerId != null) {
             console.log("Fetching data...");
             try {
                 const orders = await ProductService.getCustomersOrdersByCustomerId(customer.customerId.value);
                 setCustomerOrders(orders);
-                console.log("Orders:", customerOrders?.items);
             } catch (error) {
                 console.error("Error fetching customers:", error);
             }
-        };
-
-        if (customer.customerId != null) {
-            console.log("Customer ID is not null:", customer.customerId.value);
-            fetchData();
-        } else {
-            console.log("Customer ID is null:", customer.customerId);
-            setCustomerOrders(null); // Handling the case when customer ID is null
         }
-    }, [customer?.customerId]);
-
-    console.log(customer)
-    const products: any[] = [
-        {
-            id: 1,
-            name: "CPU",
-            price: 500
-        },
-        {
-            id: 2,
-            name: "Monitor",
-            price: 130
-        },
-        {
-            id: 3,
-            name: "RAM",
-            price: 200
-        },
-        {
-            id: 4,
-            name: "Keyboard",
-            price: 50
-        },
-        {
-            id: 5,
-            name: "Mouse",
-            price: 30
-        }
-    ];
+    };
 
     const getMessage = () => {
-        return products.length === 0 ? "No records found" : null;
+        let count = customerOrders?.items.length ?? 0;
+        return count === 0 ? "No records found" : null;
+    };
+
+    const handleButtonClick = async (order: any) => {
+        console.log("Deleting order with ID:", order);
+        try {
+            await ProductService.deleteCustomersOrdersByOrderId(order?.id);
+            console.log("Order deleted successfully");
+            fetchData(); // Call fetchData again after deleting the order
+        } catch (error) {
+            console.error("Failed to delete:", error);
+        }
     };
 
     return (
@@ -66,7 +43,7 @@ function ProductList(customer: any) {
             <div className="pt-3">
                 <div className="row">
                     <div className="col-6">
-                        <h2 className="fw-bold mb-0">Products <span className="text-muted fs-5">({products.length})</span></h2>
+                        <h2 className="fw-bold mb-0">Products <span className="text-muted fs-5">({customerOrders?.items.length ?? 0})</span></h2>
                     </div>
                     <div className="col-6 d-flex justify-content-end">
                         <button className="btn btn-primary">Add Product</button>
@@ -100,7 +77,7 @@ function ProductList(customer: any) {
                                                     <i className="material-icons">more_horiz</i>
                                                 </button>
                                                 <ul className="dropdown-menu dropdown-menu-start">
-                                                    <li><a className="dropdown-item" href="#">Delete</a></li>
+                                                    <li><a className="dropdown-item" href="#" onClick={() => handleButtonClick(order)}>Delete</a></li>
                                                 </ul>
                                             </div>
                                         </td>

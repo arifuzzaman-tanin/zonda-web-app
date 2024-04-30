@@ -2,21 +2,7 @@ import Pagination from "../Pagination/PaginationControl";
 
 function CustomerList() {
     const customers: any[] = [
-        {
-            id: 1,
-            name: "Md. Arifuzzaman Tanin",
-            contact: "437-460-XXXX"
-        },
-        {
-            id: 2,
-            name: "Shanta Akther Saniya",
-            contact: "437-460-XXXX"
-        },
-        {
-            id: 3,
-            name: "Shanta Akther Saniya",
-            contact: "437-460-XXXX"
-        }
+        
     ];
 
     const getMessage = () => {
