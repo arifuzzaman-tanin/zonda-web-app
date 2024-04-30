@@ -1,7 +1,8 @@
 import ProductList from "./components/Product/ProductList";
 import CustomerList from "./components/Customer/CustomerList";
 import CustomerSelectBox from "./components/Customer/CustomerSelectBox";
-import React, { useState } from 'react';
+import { useState } from 'react';
+import ICustomerSelectBox from './ICustomer';
 
 import {
   BrowserRouter as Router,
@@ -12,8 +13,15 @@ import {
 import "./App.css";
 
 function App() {
-
   const [activeMenuItem, setActiveMenuItem] = useState('product');
+
+  const [selectedCustomer, setSelectedCustomer] = useState<ICustomerSelectBox | null>(null);
+
+  const handleSelectChange = (selectedOption: ICustomerSelectBox | null) => {
+    setSelectedCustomer(selectedOption);
+    console.log(selectedOption);
+    // Do whatever you want with the selected customer data here
+  };
 
   // Function to handle menu item click
   const handleMenuItemClick = (menuItem: any) => {
@@ -27,7 +35,7 @@ function App() {
           <div className="container-fluid">
             <div className="row">
               <div className="col-2 app-col-height-100 bg-white pt-2">
-                <CustomerSelectBox />
+                <CustomerSelectBox onSelectChange={handleSelectChange} />
 
                 <div className="navigation-control">
                   <ul>

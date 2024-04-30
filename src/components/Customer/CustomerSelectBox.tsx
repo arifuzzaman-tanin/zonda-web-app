@@ -1,13 +1,18 @@
-import Select from 'react-select'
 import { useState, useEffect } from "react";
+import Select from 'react-select';
 import CustomersService from './CustomerService';
 import IResponse from '../../common/IResponce';
 import ICustomerSelectBox from './ICustomer';
 
 
-function CustomerSelectBox() {
+interface Props {
+    onSelectChange: (selectedOption: ICustomerSelectBox | null) => void;
+}
+
+function CustomerSelectBox({ onSelectChange }: Props) {
 
     const [selectBoxCustomers, setSelectBoxCustomers] = useState<ICustomerSelectBox[]>([]);
+    const [selectedOption, setSelectedOption] = useState<any>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,13 +32,20 @@ function CustomerSelectBox() {
         label: customer.name
     }));
 
+    const handleSelectChange = (selectedOption: ICustomerSelectBox) => {
+        setSelectedOption(selectedOption);
+        onSelectChange(selectedOption); // Call the onSelect callback with selected option
+    };
 
     return (
         <>
-            <Select defaultValue={options[0]} options={options} />
+            <Select
+                value={selectedOption}
+                onChange={handleSelectChange}
+                options={options}
+            />
         </>
     );
 }
-
 
 export default CustomerSelectBox;
